@@ -1,12 +1,12 @@
-﻿
+
 #include <iostream>
 #include <string>
 #include "Menu.h"
 #include <fstream>
+#include <stdio.h>
 #include <windows.h>
 #include "Student.h"
 #include "List.h"
-#include <time.h>
 
 
 using namespace std;
@@ -25,36 +25,29 @@ public:
 		DataBase.clear();
 	}
 
-
-	void SaveToFileBin(string Name) {
-		ofstream out(Name, ios::binary | ios::app | ios::out);
-		if (out.is_open()) {
-			Student st = Student();
-			int recordCount = getRecordCount();
-			StudentNode* sn;
-			for (int i = 0; i < recordCount; i++) {
-				out.write(startRecordString.c_str(), sizeof(startRecordString));
-				sn = &DataBase.at(i);
-				st.newMasStud(sn);
-				while (!st.list.empty()) {
-					out.write(st.list.at(0).c_str(), sizeof(st.list.at(0)));
-					st.list.erase(st.list.begin());
-				}
-				out.write(endRecordString.c_str(), sizeof(endRecordString));
+	void SaveToFile() {
+		FILE* bin;
+		fopen_s(&bin, "Database.bin", "wb");
+		if (!bin) {
+			cout << "ERROR\n";
+		}
+		int count = getRecordCount();
+		Student st = Student();
+		StudentNode* sn;
+		for (int i = 0; i < count; i++) {
+			fwrite((char*)&startRecordString, sizeof(startRecordString), 1, bin);
+			sn = &DataBase.at(i);
+			st.newMasStud(sn);
+			while (!st.list.empty()) {
+				fwrite(&st.list.at(0), sizeof(st.list.at(0)), 1, bin);
+				st.list.erase(st.list.begin());
+				fwrite((char*)&endRecordString, sizeof(endRecordString), 1, bin);
 			}
 		}
-		out.close();
-	}
+		fclose(bin);
 
-	void ReadBin(string Name) {
-		ifstream in(Name, ios::binary | ios::in);
-		in.read((char*)&DataBase, sizeof(DataBase));
-		in.close();
-	}
-
-	void SaveToFile(string Name) {
 		ofstream SaveFile;
-		SaveFile.open(Name);
+		SaveFile.open("Database");
 		if (SaveFile.is_open()) {
 			Student st = Student();
 			int recordsCount = getRecordCount();
@@ -71,13 +64,13 @@ public:
 			}
 		}
 		SaveFile.close();
-		
 	}
 
-	void ReadFile(string name) {
+	void ReadFile() {
+		ifstream File;
 		string str;
 		int count = 0;
-		ifstream File(name, ios::in);
+		File.open("Database", ios::in);
 		if (File.is_open())
 		{
 			bool isRecord = true;
@@ -158,40 +151,42 @@ public:
 			_getch();
 		}
 		File.close();
+
 	}
 
 	int getRecordCount() {
 		return DataBase.size();
 	};
 
-	void updateCountMarks3() {
+	void updatePercentMarks3() {
 		Student* stud = new Student();
 		for (int i = 0; i < DataBase.size(); i++) {
-			DataBase.at(i).countMarks3 = stud->getCountMarks3(&DataBase.at(i), rangeSem);
+			DataBase.at(i).percentMarks3 = (stud->getCountMarks3(&DataBase.at(i))) / (stud->getCountMarks(&DataBase.at(i))/100);
 		}
 		delete stud;
 	}
 
-	List <StudentNode>::iterator getMaxCountMarks3() {
+	List <StudentNode>::iterator getMaxPercentMarks3() {
 		List<StudentNode>::iterator pos = DataBase.begin();
 		List<StudentNode>::iterator mMinPos = pos;
 		while (pos != DataBase.end()) {
-			if ((*pos).countMarks3 > (*mMinPos).countMarks3)
+			if ((*pos).percentMarks3 > (*mMinPos).percentMarks3)
 				mMinPos = pos;
 			++pos;
 		}
 		return mMinPos;
 	}
 
-	void sortByCountMarks3() {
+	void sortByPerecentMarks3() {
 
-		List<StudentNode>::iterator pos = getMaxCountMarks3();
+		List<StudentNode>::iterator pos = getMaxPercentMarks3();
 		List <StudentNode> sortedLst;
 		
 		while (!DataBase.empty()) {
-			sortedLst.push_front(*getMaxCountMarks3());
-			DataBase.erase(getMaxCountMarks3());
+			sortedLst.push_front(*getMaxPercentMarks3());
+			DataBase.erase(getMaxPercentMarks3());
 		}
+		
 		for (auto item : sortedLst) {
 			DataBase.push_front(item);
 		}
@@ -200,18 +195,24 @@ public:
 
 
 
-	void print_Student_countMarks3_man() {
+	void print_Student_percentMarks3_man() {
 		for (auto item : DataBase) {
 			if (item.sex == false) {
-				cout << item.fName + " " + item.sName + " " + item.tName + " " + to_string(item.countMarks3/0.2) << "%" << endl;
+				cout << item.fName + " " + item.sName + " " + item.tName + " ";
+				cout.setf(ios::fixed);
+				cout.precision(2);
+				cout << item.percentMarks3 << "%" << endl;
 			}
 		}
 	}
 
-	void print_Student_countMarks3_women() {
+	void print_Student_percentMarks3_women() {
 		for (auto item : DataBase) {
 			if (item.sex == true) {
-				cout << item.fName + " " + item.sName + " " + item.tName + " " + to_string(item.countMarks3/0.2) + "%" << endl;
+				cout << item.fName + " " + item.sName + " " + item.tName + " ";
+				cout.setf(ios::fixed);
+				cout.precision(2);
+				cout << item.percentMarks3 << "%" << endl;
 			}
 		}
 	}
@@ -222,15 +223,13 @@ int main() {
 	setlocale(LC_ALL, "ru");
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
-	string FileName_bin = "Database.bin";
-	string FileName = "Database.txt";
 	Menu* MainMenu = new Menu();
 	StudentNode* sn = new StudentNode();
 	Student* stud = new Student();
 	FileWork* studlist = new FileWork();
 	Menu* sortMenu = new Menu();
 	Decrypt();
-	studlist->ReadFile(FileName);
+	studlist->ReadFile();
 	MainMenu->addTitleItem("Основное меню:");
 	MainMenu->addItem("Посмотреть весь список студентов (удалить или изменить данные)");
 	MainMenu->addItem("Добавить данные о студенте");
@@ -307,8 +306,7 @@ int main() {
 			studlist->DataBase.push_front(*sn);
 			break;
 		case 2:
-			studlist->SaveToFile(FileName);
-			studlist->SaveToFileBin(FileName_bin);
+			studlist->SaveToFile();
 			break;
 		case 3:
 			choice = -1;
@@ -319,6 +317,8 @@ int main() {
 					sortMenu->addItem("Мужской");
 					sortMenu->addItem("Женский");
 					sortMenu->run();
+					studlist->updatePercentMarks3();
+					studlist->sortByPerecentMarks3();
 					choice = sortMenu->getSelectedItem();
 					if (choice == 0) {;
 						break;
@@ -328,11 +328,8 @@ int main() {
 						while (s != 0) {
 							sMenu->eraseItem();
 							sMenu->addItem("Выход");
-							studlist->updateCountMarks3();
-							studlist->print_Student_countMarks3_man();
-							studlist->sortByCountMarks3();
 							cout << "\n\nОтсортированный список" << endl;
-							studlist->print_Student_countMarks3_man();
+							studlist->print_Student_percentMarks3_man();
 							system("pause");
 							sMenu->run();
 							s = sMenu->getSelectedItem();
@@ -346,11 +343,8 @@ int main() {
 						while (s != 0) {
 							sMenu->eraseItem();
 							sMenu->addItem("Выход");
-							studlist->updateCountMarks3();
-							studlist->print_Student_countMarks3_women();
-							studlist->sortByCountMarks3();
 							cout << "\n\nОтсортированный список" << endl;
-							studlist->print_Student_countMarks3_women();
+							studlist->print_Student_percentMarks3_women();
 							system("pause");
 							sMenu->run();
 							s = sMenu->getSelectedItem();
@@ -382,11 +376,19 @@ void Crypt() {
 	cin >> pass;
 
 
-	string command = "openssl\\bin\\openssl.exe aes-256-cbc -salt -a -e -in Database.txt -out Database.txt.enc -pass pass:";
+	string command = "openssl\\bin\\openssl.exe aes-256-cbc -salt -a -e -in Database.bin -out Database.bin.enc -pass pass:";
 	command += pass; 
 	system(command.c_str());
 
-	if (remove("Database.txt") != 0) {
+	if (remove("Database.bin") != 0) {
+		cout << "[ERROR] - deleting file" << endl;
+	}
+
+	string command2 = "openssl\\bin\\openssl.exe aes-256-cbc -salt -a -e -in Database -out Database.enc -pass pass:";
+	command2 += pass;
+	system(command2.c_str());
+
+	if (remove("Database") != 0) {
 		cout << "[ERROR] - deleting file" << endl;
 	}
 
@@ -421,9 +423,12 @@ void Decrypt() {
 		cin >> pass;
 		if (pass == password) {
 			flag = true;
-			string command = "openssl\\bin\\openssl.exe aes-256-cbc -salt -a -d -in Database.txt.enc -out Database.txt -pass pass:";
+			string command = "openssl\\bin\\openssl.exe aes-256-cbc -salt -a -d -in Database.bin.enc -out Database.bin -pass pass:";
 			command += pass;
 			system(command.c_str());
+			string command2 = "openssl\\bin\\openssl.exe aes-256-cbc -salt -a -d -in Database.enc -out Database -pass pass:";
+			command2 += pass;
+			system(command2.c_str());
 			continue;
 		}
 		else {
@@ -438,8 +443,11 @@ void Decrypt() {
 	//if (remove("p.txt") != 0) {
 	//	cout << "deleting file error;\n";
 	//}
+	if (remove("Database.enc") != 0) {
+		cout << "deleting file error;\n";
+	}
 	
-	if (remove("Database.txt.enc") != 0) {
+	if (remove("Database.bin.enc") != 0) {
 		cout << "deleting file error;\n";
 	}
 }
