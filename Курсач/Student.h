@@ -29,7 +29,7 @@ struct StudentNode
 	bool sex;
 	int startYear;
 	int id;
-	float countMarks3;
+	float percentMarks3;
 
 	ExamsRecords examsRecords[9][10];
 
@@ -92,9 +92,9 @@ public:
 		Menu* sexMenu = new Menu();
 		int choice = 0;
 		int exit = 3;
-		sexMenu->addTitleItem("Ïîë: ");
-		sexMenu->addItem("Ìóæñêîé");
-		sexMenu->addItem("Æåíñêèé");
+		sexMenu->addTitleItem("ÐŸÐ¾Ð»: ");
+		sexMenu->addItem("ÐœÑƒÐ¶ÑÐºÐ¾Ð¹");
+		sexMenu->addItem("Ð–ÐµÐ½ÑÐºÐ¸Ð¹");
 		while (choice != exit) {
 			sexMenu->run();
 			choice = sexMenu->getSelectedItem();
@@ -119,44 +119,44 @@ public:
 		string tmpStr = "";
 		int choice = -1;
 		int exit = 10;
-		DepartmentMenu->addTitleItem("Êàôåäðà (èíñòèòóò): ");
-		DepartmentMenu->addItem("ÈÊÁ :)");
-		DepartmentMenu->addItem("ÈÈÈ");
-		DepartmentMenu->addItem("ÈÈÒ");
-		DepartmentMenu->addItem("ÈÏÒÈÏ");
-		DepartmentMenu->addItem("ÈÐÈ");
-		DepartmentMenu->addItem("ÈÒÓ");
-		DepartmentMenu->addItem("ÈÒÕÒ");
+		DepartmentMenu->addTitleItem("ÐšÐ°Ñ„ÐµÐ´Ñ€Ð° (Ð¸Ð½ÑÑ‚Ð¸Ñ‚ÑƒÑ‚): ");
+		DepartmentMenu->addItem("Ð˜ÐšÐ‘ :)");
+		DepartmentMenu->addItem("Ð˜Ð˜Ð˜");
+		DepartmentMenu->addItem("Ð˜Ð˜Ð¢");
+		DepartmentMenu->addItem("Ð˜ÐŸÐ¢Ð˜ÐŸ");
+		DepartmentMenu->addItem("Ð˜Ð Ð˜");
+		DepartmentMenu->addItem("Ð˜Ð¢Ð£");
+		DepartmentMenu->addItem("Ð˜Ð¢Ð¥Ð¢");
 		while (choice != exit) {
 			DepartmentMenu->run();
 			choice = DepartmentMenu->getSelectedItem();
 			switch (choice) {
 			case 0:
-				tmpStr = "ÈÊÁ :)";
+				tmpStr = "Ð˜ÐšÐ‘ :)";
 				choice = exit;
 				break;
 			case 1:
-				tmpStr = "ÈÈÈ";
+				tmpStr = "Ð˜Ð˜Ð˜";
 				choice = exit;
 				break;
 			case 2:
-				tmpStr = "ÈÈÒ";
+				tmpStr = "Ð˜Ð˜Ð¢";
 				choice = exit;
 				break;
 			case 3:
-				tmpStr = "ÈÏÒÈÏ";
+				tmpStr = "Ð˜ÐŸÐ¢Ð˜ÐŸ";
 				choice = exit;
 				break;
 			case 4:
-				tmpStr = "ÈÐÈ";
+				tmpStr = "Ð˜Ð Ð˜";
 				choice = exit;
 				break;
 			case 5:
-				tmpStr = "ÈÒÓ";
+				tmpStr = "Ð˜Ð¢Ð£";
 				choice = exit;
 				break;
 			case 6:
-				tmpStr = "ÈÒÕÒ";
+				tmpStr = "Ð˜Ð¢Ð¥Ð¢";
 				choice = exit;
 				break;
 			default: break;
@@ -171,34 +171,34 @@ public:
 		const int Exit = 0;
 		int selectedStuMenu = -1;
 		AddClass* ce = new AddClass();
-		StuMenu->addItem("Âûõîä");
-		StuMenu->addItem("Ââåäèòå ôàìèëèþ");
-		StuMenu->addItem("Ââåäèòå èìÿ");
-		StuMenu->addItem("Ââåäèòå îò÷åñòâî");
-		StuMenu->addItem("Ââåäèòå äàòó ðîæäåíèÿ");
-		StuMenu->addItem("Ââåäèòå íîìåð çà÷åòíîé êíèæêè");
-		StuMenu->addItem("Âûáåðèòå ïîë");
-		StuMenu->addItem("Ââåäèòå ôàêóëüòåò");
-		StuMenu->addItem("Âûáåðèòå êàôåäðó");
-		StuMenu->addItem("Ââåäèòå ãîä ïîñòóïëåíèÿ");
-		StuMenu->addItem("Ââåäèòå ãðóïïó");
-		StuMenu->addItem("Äîáàâèòü ðåçóëüòàòû ýêçàìåíîâ");
+		StuMenu->addItem("Ð’Ñ‹Ñ…Ð¾Ð´");
+		StuMenu->addItem("Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ„Ð°Ð¼Ð¸Ð»Ð¸ÑŽ");
+		StuMenu->addItem("Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð¼Ñ");
+		StuMenu->addItem("Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¾Ñ‚Ñ‡ÐµÑÑ‚Ð²Ð¾");
+		StuMenu->addItem("Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð´Ð°Ñ‚Ñƒ Ñ€Ð¾Ð¶Ð´ÐµÐ½Ð¸Ñ");
+		StuMenu->addItem("Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð¼ÐµÑ€ Ð·Ð°Ñ‡ÐµÑ‚Ð½Ð¾Ð¹ ÐºÐ½Ð¸Ð¶ÐºÐ¸");
+		StuMenu->addItem("Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ð¿Ð¾Ð»");
+		StuMenu->addItem("Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ„Ð°ÐºÑƒÐ»ÑŒÑ‚ÐµÑ‚");
+		StuMenu->addItem("Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ ÐºÐ°Ñ„ÐµÐ´Ñ€Ñƒ");
+		StuMenu->addItem("Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð³Ð¾Ð´ Ð¿Ð¾ÑÑ‚ÑƒÐ¿Ð»ÐµÐ½Ð¸Ñ");
+		StuMenu->addItem("Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð³Ñ€ÑƒÐ¿Ð¿Ñƒ");
+		StuMenu->addItem("Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ñ‹ ÑÐºÐ·Ð°Ð¼ÐµÐ½Ð¾Ð²");
 		int day, month, year;
 		while (selectedStuMenu != Exit) {
 			StuMenu->eraseTitle();
-			StuMenu->addTitleItem("Èíôîðìàöèÿ:");
-			StuMenu->addTitleItem("ÔÈÎ: " + sn->fName+ " " + sn->sName + " " + sn->tName);
+			StuMenu->addTitleItem("Ð˜Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ñ:");
+			StuMenu->addTitleItem("Ð¤Ð˜Ðž: " + sn->fName+ " " + sn->sName + " " + sn->tName);
 			string sex = "";
-			if (!sn->sex) { sex = "Ìóæñêîé"; }
-			else if (sn->sex){sex = "Æåíñêèé"; }
-			StuMenu->addTitleItem("Ïîë: " + sex); 
-			StuMenu->addTitleItem("Äàòà ðîæäåíèÿ: " + to_string(sn->birthDate.day)
+			if (!sn->sex) { sex = "ÐœÑƒÐ¶ÑÐºÐ¾Ð¹"; }
+			else if (sn->sex){sex = "Ð–ÐµÐ½ÑÐºÐ¸Ð¹"; }
+			StuMenu->addTitleItem("ÐŸÐ¾Ð»: " + sex); 
+			StuMenu->addTitleItem("Ð”Ð°Ñ‚Ð° Ñ€Ð¾Ð¶Ð´ÐµÐ½Ð¸Ñ: " + to_string(sn->birthDate.day)
 			+ "." + std::to_string(sn->birthDate.month) + "." + to_string(sn->birthDate.year));
-			StuMenu->addTitleItem("Ãîä íà÷àëà îáó÷åíèÿ: " + to_string(sn->startYear));
-			StuMenu->addTitleItem("Íîìåð çà÷åòíîé êíèæêè: " + sn->bookNumber);
-			StuMenu->addTitleItem("Ãðóïïà: " + sn->group);
-			StuMenu->addTitleItem("Ôàêóëüòåò: " + sn->faculty);
-			StuMenu->addTitleItem("Êàôåäðà: " + sn->department);
+			StuMenu->addTitleItem("Ð“Ð¾Ð´ Ð½Ð°Ñ‡Ð°Ð»Ð° Ð¾Ð±ÑƒÑ‡ÐµÐ½Ð¸Ñ: " + to_string(sn->startYear));
+			StuMenu->addTitleItem("ÐÐ¾Ð¼ÐµÑ€ Ð·Ð°Ñ‡ÐµÑ‚Ð½Ð¾Ð¹ ÐºÐ½Ð¸Ð¶ÐºÐ¸: " + sn->bookNumber);
+			StuMenu->addTitleItem("Ð“Ñ€ÑƒÐ¿Ð¿Ð°: " + sn->group);
+			StuMenu->addTitleItem("Ð¤Ð°ÐºÑƒÐ»ÑŒÑ‚ÐµÑ‚: " + sn->faculty);
+			StuMenu->addTitleItem("ÐšÐ°Ñ„ÐµÐ´Ñ€Ð°: " + sn->department);
 			StuMenu->addTitleItem("");
 			StuMenu->run();
 			selectedStuMenu = StuMenu->getSelectedItem();
@@ -211,47 +211,47 @@ public:
 				selectedStuMenu = Exit;
 				break;
 			case 1:
-				ce->setLable("Ôàìèëèÿ ");
+				ce->setLable("Ð¤Ð°Ð¼Ð¸Ð»Ð¸Ñ ");
 				sn->fName = ce->setdateString(sn->fName);
 				break;
 			case 2:
-				ce->setLable("Èìÿ ");
+				ce->setLable("Ð˜Ð¼Ñ ");
 				sn->sName = ce->setdateString(sn->sName);
 				break;
 			case 3:
-				ce->setLable("Îò÷åñòâî ");
+				ce->setLable("ÐžÑ‚Ñ‡ÐµÑÑ‚Ð²Ð¾ ");
 				sn->tName = ce->setdateString(sn->tName);
 				break;
 			case 4:
-				ce->setLable("Äåíü ");
+				ce->setLable("Ð”ÐµÐ½ÑŒ ");
 				sn->birthDate.day = ce->setdateInt(1, 31);
-				ce->setLable("Ìåñÿö ");
+				ce->setLable("ÐœÐµÑÑÑ† ");
 				sn->birthDate.month = ce->setdateInt(1, 12);
-				ce->setLable("Ãîä ");
+				ce->setLable("Ð“Ð¾Ð´ ");
 				sn->birthDate.year = ce->setdateInt(1900, 2010);
 				break;
 			case 5:
-				ce->setLable("Íîìåð çà÷åòíîé êíèæêè ");
+				ce->setLable("ÐÐ¾Ð¼ÐµÑ€ Ð·Ð°Ñ‡ÐµÑ‚Ð½Ð¾Ð¹ ÐºÐ½Ð¸Ð¶ÐºÐ¸ ");
 				sn->bookNumber = ce->setdateString(sn->bookNumber);
 				break;
 			case 6:
-				ce->setLable("Ïîë ");
+				ce->setLable("ÐŸÐ¾Ð» ");
 				sn->sex = setSex();
 				break;
 			case 7:
-				ce->setLable("Ôàêóëüòåò ");
+				ce->setLable("Ð¤Ð°ÐºÑƒÐ»ÑŒÑ‚ÐµÑ‚ ");
 				sn->faculty = ce->setdateString(sn->faculty);
 				break;
 			case 8:
-				ce->setLable("Êàôåäðà ");
+				ce->setLable("ÐšÐ°Ñ„ÐµÐ´Ñ€Ð° ");
 				sn->department = setDepartment();
 				break;
 			case 9:
-				ce->setLable("Ãîä ïîñòóïëåíèÿ ");
+				ce->setLable("Ð“Ð¾Ð´ Ð¿Ð¾ÑÑ‚ÑƒÐ¿Ð»ÐµÐ½Ð¸Ñ ");
 				sn->startYear = ce->setdateInt(1900, 2022);
 				break;
 			case 10:
-				ce->setLable("Ãðóïïà ");
+				ce->setLable("Ð“Ñ€ÑƒÐ¿Ð¿Ð° ");
 				sn->group = ce->setdateString(sn->group);
 				break;
 			case 11:
@@ -278,13 +278,13 @@ public:
 		Menu* examsMenu = new Menu();
 		int result = -1;
 		Exams* exams = new Exams();
-		sesMenu->addItem("Âûõîä");
+		sesMenu->addItem("Ð’Ñ‹Ñ…Ð¾Ð´");
 		for (int i = 1; i < 10; i++) {
-			sesMenu->addItem("Ñåññèÿ ¹" + to_string(i));
+			sesMenu->addItem("Ð¡ÐµÑÑÐ¸Ñ â„–" + to_string(i));
 		}
 		while (choice != exit) {
 			sesMenu->eraseTitle();
-			sesMenu->addTitleItem("Ýêçàìåíû:");
+			sesMenu->addTitleItem("Ð­ÐºÐ·Ð°Ð¼ÐµÐ½Ñ‹:");
 			sesMenu->run();
 			choice = sesMenu->getSelectedItem();
 			if (choice == exit) {
@@ -294,25 +294,25 @@ public:
 			int Sess = choice;
 			if ((Sess >= 1) and (Sess <= 10)) {
 				examsMenu->eraseAll();
-				examsMenu->addTitleItem("Ñåññèÿ ¹" + to_string(Sess));
+				examsMenu->addTitleItem("Ð¡ÐµÑÑÐ¸Ñ â„–" + to_string(Sess));
 				result = 1;
 				while (result != exit) {
 					examsMenu->eraseItem();
-					examsMenu->addItem("Âûõîä");
-					examsMenu->addItem("Äîáàâèòü ïðåäìåò è îöåíêó");
-					examsMenu->addItem("Óäàëèòü ");
+					examsMenu->addItem("Ð’Ñ‹Ñ…Ð¾Ð´");
+					examsMenu->addItem("Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ Ð¿Ñ€ÐµÐ´Ð¼ÐµÑ‚ Ð¸ Ð¾Ñ†ÐµÐ½ÐºÑƒ");
+					examsMenu->addItem("Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ ");
 					for (int i = 0; i < 10; i++) {
 						if (not sn->examsRecords[Sess - 1][i].isEmpty) 
 						{
 							string resultmark = "";
 							int resultInt = sn->examsRecords[Sess - 1][i].result;
-							if (resultInt == 0) resultmark = "Íå çà÷¸ò";
-							if (resultInt == 1) resultmark = "Çà÷¸ò";
+							if (resultInt == 0) resultmark = "ÐÐµ Ð·Ð°Ñ‡Ñ‘Ñ‚";
+							if (resultInt == 1) resultmark = "Ð—Ð°Ñ‡Ñ‘Ñ‚";
 							if ((resultInt >= 2) and (resultInt <= 5)) {
 								resultmark = to_string(resultInt);
 							}
-							examsMenu->addItem("Ïðåäìåò: " + sn->examsRecords[Sess - 1][i].name
-								+ " Ðåçóëüòàò: " + resultmark);
+							examsMenu->addItem("ÐŸÑ€ÐµÐ´Ð¼ÐµÑ‚: " + sn->examsRecords[Sess - 1][i].name
+								+ " Ð ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚: " + resultmark);
 						}
 					}
 					examsMenu->run();
@@ -322,7 +322,7 @@ public:
 						int num = examsMenu->getItemsCount()-4;
 						if (num > 9) {
 							system("cls");
-							cout << "Ââîäèòü áîëüøå 9 ïðåäìåòîâ ââîáäèòü íåëüçÿ!!!";
+							cout << "Ð’Ð²Ð¾Ð´Ð¸Ñ‚ÑŒ Ð±Ð¾Ð»ÑŒÑˆÐµ 9 Ð¿Ñ€ÐµÐ´Ð¼ÐµÑ‚Ð¾Ð² Ð²Ð²Ð¾Ð±Ð´Ð¸Ñ‚ÑŒ Ð½ÐµÐ»ÑŒÐ·Ñ!!!";
 							_getch();
 						}
 						else {
@@ -346,14 +346,14 @@ public:
 
 	void addExams(StudentNode* sn, int Sess, int Item) {
 		AddClass* ac = new AddClass();
-		ac->setLable("Ïðåäìåò ");
+		ac->setLable("ÐŸÑ€ÐµÐ´Ð¼ÐµÑ‚ ");
 		sn->examsRecords[Sess - 1][Item].name = ac->setdateString(sn->examsRecords[Sess-1][Item].name);
 		int result = -1;
 		int exit = 0;
 		Menu* markMenu = new Menu();
-		markMenu->addTitleItem("Îöåíêà");
-		markMenu->addItem("Íå çà÷¸ò"); 
-		markMenu->addItem("Çà÷¸ò"); 
+		markMenu->addTitleItem("ÐžÑ†ÐµÐ½ÐºÐ°");
+		markMenu->addItem("ÐÐµ Ð·Ð°Ñ‡Ñ‘Ñ‚"); 
+		markMenu->addItem("Ð—Ð°Ñ‡Ñ‘Ñ‚"); 
 		markMenu->addItem("2"); 	
 		markMenu->addItem("3"); 		
 		markMenu->addItem("4"); 		
@@ -374,21 +374,21 @@ public:
 		int result = -1;
 		int exit = 0;
 		Menu* ExMenu = new Menu();
-		ExMenu->addTitleItem("Ïðåäìåò");
+		ExMenu->addTitleItem("ÐŸÑ€ÐµÐ´Ð¼ÐµÑ‚");
 		while (result != exit) {
 			ExMenu->eraseItem();
-			ExMenu->addItem("Âûõîä");
+			ExMenu->addItem("Ð’Ñ‹Ñ…Ð¾Ð´");
 			for (int i = 0; i < 10; i++)
 				if (not sn->examsRecords[Sess - 1][i].isEmpty)
 				{
 					string markString = "";
 					int markInt = sn->examsRecords[Sess - 1][i].result;
-					if (markInt == 0) markString = "Íå çà÷¸ò";
-					if (markInt == 1) markString = "Çà÷¸ò";
+					if (markInt == 0) markString = "ÐÐµ Ð·Ð°Ñ‡Ñ‘Ñ‚";
+					if (markInt == 1) markString = "Ð—Ð°Ñ‡Ñ‘Ñ‚";
 					if ((markInt >= 2) and (markInt <= 5)) {
 						markString = to_string(markInt);
 					}
-					ExMenu->addItem("Ïðåäìåò: " + sn->examsRecords[Sess - 1][i].name + " Ðåçóëüòàò: "
+					ExMenu->addItem("ÐŸÑ€ÐµÐ´Ð¼ÐµÑ‚: " + sn->examsRecords[Sess - 1][i].name + " Ð ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚: "
 						+ markString);
 				}
 			ExMenu->run();
@@ -499,7 +499,7 @@ public:
 	string setParam(string name, int intvalue) {
 		string outString = "name:000; value:int:000 -: ";
 		string value = std::to_string(intvalue);
-		int offset = outString.length(); //28
+		int offset = outString.length();
 		string lengthName = std::to_string(name.length());
 		if (lengthName.length() == 1) {
 			outString[7] = lengthName[0];
@@ -522,9 +522,7 @@ public:
 
 	string setParam(string name, string value) {
 		string outString = "name:000; value:str:000 -: ";
-		//  0123456789012345678901234567
-		int offset = outString.length(); //28
-		//cout << offset;
+		int offset = outString.length();
 		string lengthName = std::to_string(name.length());
 		if (lengthName.length() == 1) {
 			outString[7] = lengthName[0];
@@ -533,7 +531,7 @@ public:
 			outString[6] = lengthName[0];
 			outString[7] = lengthName[1];
 		}
-		string lengthValue = std::to_string(value.length());
+		string lengthValue = to_string(value.length());
 		if (lengthValue.length() == 1) {
 			outString[22] = lengthValue[0];
 		}
@@ -545,14 +543,24 @@ public:
 		return outString;
 	}
 
-	int getCountMarks3(StudentNode* sn, List <int> rangeSem) {
-		int count = 0;
+	float getCountMarks(StudentNode* sn) {
+		float count2345 = 0;
 		for (int i=0; i<2 ; i++)
+			for (int j = 0; j < 10; j++)
+				if (sn->examsRecords[i][j].result == 3 || sn->examsRecords[i][j].result == 4
+					|| sn->examsRecords[i][j].result == 5 || sn->examsRecords[i][j].result == 2) {
+					count2345 = count2345 + 1;
+				}
+		return count2345;
+	}
+
+	int getCountMarks3(StudentNode* sn) {
+		int count = 0;
+		for (int i = 0; i < 2; i++)
 			for (int j = 0; j < 10; j++)
 				if (sn->examsRecords[i][j].result == 3) {
 					count++;
 				}
 		return count;
 	}
-
 };
